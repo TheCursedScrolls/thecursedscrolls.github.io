@@ -11017,7 +11017,7 @@ class class_scroll_Scroll {
         this.box = $(document.createElement("div"));
         this.box.addClass("box");
         if (scrollData.styleInitInside != undefined)
-            scrollData.styleInitInside.forEach(attr => this.box[0].style.cssText += attr);
+            scrollData.styleInitInside.forEach(attr => this.box[0].style.cssText += attr + "!important");
         this.height = scroll.height != undefined ? scroll.height : 2000;
         this.box.css("height", this.height + "px");
         this.events = [];
@@ -11098,7 +11098,6 @@ class class_scroll_Scroll {
                 else if (event.type == "background") {
                     const speed = event.speed;
                     let color = this.node.css("background-color");
-                    console.log(color);
                     color = color.split("rgb(")[1];
                     color = color.split(")")[0];
                     color = color.split(",");
@@ -11155,12 +11154,6 @@ class class_scroll_Scroll {
             "none";
         if (tm != "none") {
             var values = tm.split('(')[1].split(')')[0].split(',');
-            /*
-            a = values[0];
-            b = values[1];
-            angle = Math.round(Math.atan2(b,a) * (180/Math.PI));
-            */
-            //return Math.round(Math.atan2(values[1],values[0]) * (180/Math.PI)); //this would return negative values the OP doesn't wants so it got commented and the next lines of code added
             //@ts-ignore
             var angle = Math.round(Math.atan2(values[1], values[0]) * (180 / Math.PI));
             return (angle < 0 ? angle + 360 : angle); //adding 360 degrees here when angle < 0 is equivalent to adding (2 * Math.PI) radians before
@@ -11176,10 +11169,8 @@ ts_$(document).ready(() => {
     new class_scroll_Scroll({
         elemId: "scroll0",
         text: [""],
-        styleInit: ["background-color: rgba(255,255,255,1)"],
-        events: [
-            { type: "background", speed: -1 },
-        ],
+        styleInit: ["background: transparent", "height: 100%"],
+        styleInitInside: ["height: 1000px"]
     });
     const audioSkyrim = new Audio('../audios/skyrim.mp3');
     audioSkyrim.volume = 0.4;
@@ -11187,15 +11178,18 @@ ts_$(document).ready(() => {
         elemId: "scrollIntro",
         text: [""],
         //audio: audioSkyrim,
+        height: 10000,
         styleInit: [
             "border: 0",
-            "box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+            "box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);",
+            "height: 400px",
         ],
         styleInitInside: [
             "background-image: url('https://i.gyazo.com/77c27a85a9138471e0891000f317b7b7.png')",
             "margin-block-start: -1em;",
             "font-family: FreeMono, monospace",
             "padding-left: 20px",
+            "padding-right: 20px"
         ]
     });
     new class_scroll_Scroll({
@@ -11230,7 +11224,10 @@ ts_$(document).ready(() => {
     new class_scroll_Scroll({
         elemId: "scroll5",
         text: ["Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>"],
-        events: [{ type: "line-height", speed: 5 }],
+        events: [
+            { type: "line-height", speed: 5 },
+            { type: "letter-spacing", speed: 1 }
+        ],
         styleInit: ["line-height: 0px", "padding-top:20px"]
     });
     const door = String.raw `           ______        <br>` +
@@ -11284,7 +11281,73 @@ ts_$(document).ready(() => {
         audio: audioShrek,
         audioTime: [{ start: 1, duration: 800 }, { start: 2000 }]
     });
+    //RANDOM
+    ts_$("#gotoRandom").click(function () {
+        ts_$('#scroll0').find(".nodescroll0").animate({
+            scrollTop: ts_$("#random").offset().top - 100
+        }, 1000);
+    });
+    ts_$("#generate").click(() => generateRandom());
+    ts_$("#numberEvents").on("input", () => generateRandom(ts_$("#numberEvents").val()));
+    generateRandom();
+    function generateRandom(numEvents) {
+        ts_$("#scrollRandom").html("");
+        const attr = ts_$("#scrollRandom")[0].style;
+        const list = [];
+        for (var key in attr) {
+            list.push(key);
+        }
+        const randomEvents = numEvents == undefined ? Math.floor(Math.random() * 4) + 4 : numEvents;
+        ts_$("#numberEvents").val(randomEvents);
+        const attrList = getRandom(list, randomEvents);
+        let string = '"events": [';
+        attrList.forEach(attr => {
+            const speed = Math.floor(Math.random() * 5) + 1;
+            string += '\n\t\t{"type": "' + attr + '", "speed":' + speed + '},';
+        });
+        string = string.substring(0, string.length - 1);
+        string += "\n\t]";
+        ts_$(".code").val(`
+new Scroll({
+    "elemId": "scrollRandom",
+    "text":["<br><br><br>Klaatu barada nikto<br> Klaatu barada nikto<br> Klaatu barada nikto<br> Klaatu barada nikto<br> Klaatu barada nikto"],
+    ` + string + `
+});`);
+        let code = ts_$('.code').val().split("new Scroll({")[1].split("})")[0];
+        new class_scroll_Scroll(JSON.parse("{" + code + "}"));
+        ts_$('.code').on("input", (e) => {
+            ts_$("#scrollRandom").html("");
+            let code = ts_$('.code').val().split("new Scroll({")[1].split("})")[0].replace(/ /g, '').replace(/\r?\n|\r/g, '');
+            new class_scroll_Scroll(JSON.parse("{" + code + "}"));
+        });
+        ts_$(document).delegate('.code', 'keydown', function (e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode == 9) {
+                e.preventDefault();
+                var start = this.selectionStart;
+                var end = this.selectionEnd;
+                // set textarea value to: text before caret + tab + text after caret
+                ts_$(this).val(ts_$(this).val().substring(0, start)
+                    + "\t"
+                    + ts_$(this).val().substring(end));
+                // put caret at right position again
+                this.selectionStart =
+                    this.selectionEnd = start + 1;
+            }
+        });
+    }
 });
+function getRandom(arr, n) {
+    var result = new Array(n), len = arr.length, taken = new Array(len);
+    if (n > len)
+        throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+        var x = Math.floor(Math.random() * len);
+        result[n] = arr[x in taken ? taken[x] : x];
+        taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
+}
 
 
 /***/ })

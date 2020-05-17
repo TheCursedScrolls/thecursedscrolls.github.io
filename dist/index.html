@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Titulo Página</title>
+  <title>The Cursed Scrolls</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="index.css">
@@ -9,122 +9,146 @@
 </head>
 
 <body>
+  <button id="gotoRandom" style="z-index:1000; position:fixed; top:5%; right:5%">Go to Randomizer</button>
 
   <div id="scroll0" class="mainBloque">
-    <img style="margin-bottom:100px" src="url('/img/title.png')"/>
+    <div class="header">
+      <img id="title" src="img/title.png" />
+      <div id="scrollIntro" class="bloque" style="margin-bottom:10px">
+        <br>
+        <h3>Welcome to The Cursed Scrolls</h3>
+        <p>¿What is The Cursed Scrolls?</p>
+        <p>The Cursed Scrolls is the impractical library that you need for your scrolls.</p>
+        <p>✔ Insert a gif in the scrollbar</p>
+        <p>✔ Unncecessarily rotate the text everytime you scroll</p>
+        <p>✔ or change its size</p>
+        <p>✔ or move its content</p>
+        <p>✔ Make your scroll size unnecessarily big</p>
+        <p>And a lot more pointless features...</p>
+      </div>
+      <br><br>
+    </div>
 
-    <div id="scrollIntro" class="bloque">
+    <br>
+
+    <div id="home">
+      <div class="bloque">
+        <h2>Example 1: Gif</h2>
+        <code>
+          new Scroll({<br>
+            &nbsp;&nbsp;elemId: "scroll1",<br>
+            &nbsp;&nbsp;gifUrl: "https://i.gifer.com/8vGN.gif"<br>
+          });
+        </code>
+        <div id="scroll1">
+          <p>Cursed gif scroll</p>
+        </div>
+      </div>
+
+      <div class="bloque">
+        <h2>Example 2: Translation</h2>
+        <code>
+          new Scroll({
+            &nbsp;&nbsp;elemId: "scroll2",<br>
+            &nbsp;&nbsp;events: [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp; { type: "margin-top", speed: 10 },<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;    { type: "margin-left", speed: 10 }<br>
+            &nbsp;&nbsp;],<br>
+        });
+        </code>
+        <div id="scroll2">
+          <p>Cursed moving scroll</p>
+        </div>
+      </div>
       <br>
-      <h3>Welcome to The Cursed Scrolls</h3>
-      <p>Where the heck am I?</p>
-    </div>
 
-    <div class="bloque">
-      <h1>Cursed gif scroll</h1>
-      <div id="scroll1">
-        <p>Cursed gif scroll</p>
+
+      <div class="bloque">
+        <h2>Example 3: Rotation</h2>
+        <code>
+          new Scroll({<br>
+            &nbsp;&nbsp;  elemId: "scroll10",<br>
+            &nbsp;&nbsp;  events: [{type:"transform", speed:5}]<br>
+        });
+        </code>
+        <div id="scroll10">
+          <p>Cursed rotation scroll</p>
+        </div>
+      </div>
+      <br>
+
+
+      <div class="bloque">
+        <h2>Example 4: Size</h2>
+        <code>
+          new Scroll({
+            &nbsp;&nbsp;  elemId: "scroll3",<br>
+            &nbsp;&nbsp;   height: 80000,<br>
+            &nbsp;&nbsp;  events: [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;      { type: "width", speed: -2 },<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;      { type: "height", speed: -5 },<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;      { type: "margin-left", speed: 5 }<br>
+            &nbsp;&nbsp;  ]
+        });
+        </code>
+        <div id="scroll3">
+          <p>Cursed size scroll</p>
+        </div>
+      </div>
+      <br>
+
+      <div class="bloque">
+        <h2>Example 5: Infinite</h2>
+        <code>
+          new Scroll({<br>
+            &nbsp;&nbsp;  elemId: "scroll4",<br>
+            &nbsp;&nbsp;  text: ["", ""],<br>
+            &nbsp;&nbsp;  changeText: [0, 1],<br>
+        });
+        </code>
+        <div id="scroll4">
+          <p>Cursed never ending scroll</p>
+        </div>
+      </div>
+      <br>
+
+      <div class="bloque">
+        <h2>Example 6: ???</h2>
+        <code>
+          new Scroll({<br>
+            &nbsp;&nbsp;  elemId: "scroll5",<br>
+            &nbsp;&nbsp;  text: ["Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>"],<br>
+            &nbsp;&nbsp;events: [<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;{ type: "line-height", speed: 5 }, <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;{type: "letter-spacing", speed:1}<br>
+            &nbsp;&nbsp;],<br>
+            &nbsp;&nbsp;  styleInit: ["line-height: 0px", "padding-top:20px"]<br>
+        });
+        </code>
+        <div id="scroll5"></div>
+      </div>
+      <br>
+      <div class="bloque">
+        <h2>Extra 1</h2>
+        <p>Cursed things like these can be created with few lines of code</p>
+        <div id="extra1"></div>
       </div>
     </div>
 
-    <code>
-      new Scroll({<br>
-        &nbsp;&nbsp;elemId: "scroll1",<br>
-        &nbsp;&nbsp;gifUrl: "https://i.gifer.com/8vGN.gif"<br>
-      });
-    </code>
-    <br><br>
-
-
-    <div class="bloque">
-      <h1>Cursed moving scroll</h1>
-      <div id="scroll2">
-        <p>Cursed moving scroll</p>
+    <div class="bloque" id="random">
+      <h2>Cursed Random scroll</h2>
+      <button id="generate">Generate another random cursed scroll</button>
+      <p>This is a randomly generated scroll. You can modify its behaviour in the code below.</p>
+      <div id="scrollRandom"></div>
+      <br><br>
+      <span>Number of events: </span><input id="numberEvents" placeHolder="Number of events" type="number" />
+      <br>
+      <i>As highest the number of events are, the weirder and cursed it becomes. Try with 100.</i>
+      <textarea style="height:500px; margin-top:100px; width:100%" class="code" />
       </div>
-    </div>
-
-    <code>
-      new Scroll({
-        &nbsp;&nbsp;elemId: "scroll2",<br>
-        &nbsp;&nbsp;events: [<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; { type: "margin-top", speed: 10 },<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;    { type: "margin-left", speed: 10 }<br>
-        &nbsp;&nbsp;],<br>
-    });
-    </code>
-    <br><br>
-
-    <div class="bloque">
-      <h1>Cursed rotating scroll</h1>
-      <div id="scroll10">
-        <p>Cursed rotation scroll</p>
-      </div>
-    </div>
-
-    <code>
-      new Scroll({<br>
-        &nbsp;&nbsp;  elemId: "scroll10",<br>
-        &nbsp;&nbsp;  events: [{type:"transform", speed:5}]<br>
-    });
-    </code>
-    <br><br>
-
-
-    <div class="bloque">
-      <h1>Cursed size scroll</h1>
-      <div id="scroll3">
-        <p>Cursed size scroll</p>
-      </div>
-    </div>
-
-    <code>
-      new Scroll({
-        &nbsp;&nbsp;  elemId: "scroll3",<br>
-        &nbsp;&nbsp;   height: 80000,<br>
-        &nbsp;&nbsp;  events: [<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;      { type: "width", speed: -2 },<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;      { type: "height", speed: -5 },<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;      { type: "margin-left", speed: 5 }<br>
-        &nbsp;&nbsp;  ]
-    });
-    </code>
-    <br><br>
-
-    <div class="bloque">
-      <h1>Cursed never ending scroll</h1>
-      <div id="scroll4">
-        <p>Cursed never ending scroll</p>
-      </div>
-    </div>
-
-    <code>
-      new Scroll({<br>
-        &nbsp;&nbsp;  elemId: "scroll4",<br>
-        &nbsp;&nbsp;  text: ["", ""],<br>
-        &nbsp;&nbsp;  changeText: [0, 1],<br>
-    });
-    </code>
-    <br><br>
-
-    <div class="bloque">
-      <h1>Cursed line height scroll</h1>
-      <div id="scroll5"></div>
-    </div>
-
-    <code>
-      new Scroll({<br>
-        &nbsp;&nbsp;  elemId: "scroll5",<br>
-        &nbsp;&nbsp;  text: ["Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>Cursed line height scoll<br>"],<br>
-        &nbsp;&nbsp;  events: [{ type: "line-height", speed: 5 }],<br>
-        &nbsp;&nbsp;  styleInit: ["line-height: 0px", "padding-top:20px"]<br>
-    });
-    </code>
-    <br><br>
-
-    <div class="bloque">
-      <h1>Extra 1</h1>
-      <div id="extra1"></div>
     </div>
   </div>
+
 
 </body>
 
