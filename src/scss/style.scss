@@ -9,7 +9,7 @@ html,body{
     margin: 0 auto 30px;
     padding: 10px 0;
     background: url('https://i.gyazo.com/27f20faae305e675c61d150715f707e3.jpg') top center no-repeat fixed;
-    background-size: 100%; 
+    background-size: cover; 
 }
 
 .bloque{
@@ -51,7 +51,7 @@ h1, h2{
     display:block;
     margin:auto;
     margin-bottom: 50px;
-    width:100%;
+    width:90%;
 }
 
 #title{
